@@ -2,10 +2,51 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id       String @id @default(uuid())
+    email    String @unique
+    password String
+    name     String
+    cpf      String @unique
+    cards    Card[]
+
+    @@map("Users")
+}
+
+model Card {
+    id             String   @id @default(uuid())
+    account_holder String
+    number         String   @unique
+    cvv            String
+    validity       DateTime
+    User           User?    @relation(fields: [userId], references: [id])
+    userId         String?
+
+    @@map("Cards")
+}
+
+model ADM {
+    id       String @id @default(uuid())
+    name     String
+    cnpj     String @unique
+    email    String @unique
+    password String
+}
+
+model Product {
+    id          String @id @default(uuid())
+    name        String
+    price       BigInt
+    description String
+    img         String
+
+    @@map("Products")
 }
