@@ -11,12 +11,14 @@ datasource db {
 }
 
 model User {
-    id       String @id @default(uuid())
-    email    String @unique
+    id       String    @id @default(uuid())
+    email    String    @unique
     password String
     name     String
-    cpf      String @unique
+    cpf      String    @unique
     cards    Card[]
+    Order    Order[]
+    address  Address[]
 
     @@map("Users")
 }
@@ -29,6 +31,7 @@ model Card {
     validity       DateTime
     User           User?    @relation(fields: [userId], references: [id])
     userId         String?
+    Order          Order[]
 
     @@map("Cards")
 }
@@ -39,14 +42,41 @@ model ADM {
     cnpj     String @unique
     email    String @unique
     password String
+
+    @@map("ADMs")
 }
 
 model Product {
-    id          String @id @default(uuid())
+    id          String  @id @default(uuid())
     name        String
     price       BigInt
     description String
     img         String
+    Order       Order?  @relation(fields: [orderId], references: [id])
+    orderId     String?
 
     @@map("Products")
+}
+
+model Order {
+    id        String    @id @default(uuid())
+    products  Product[]
+    user      User      @relation(fields: [userId], references: [id])
+    card      Card      @relation(fields: [cardId], references: [id])
+    total     BigInt
+    userId    String
+    cardId    String
+    address   Address   @relation(fields: [addressId], references: [id])
+    addressId String
+}
+
+model Address {
+    id     String  @id @default(uuid())
+    cep    String
+    city   String
+    number Int
+    street String
+    User   User?   @relation(fields: [userId], references: [id])
+    userId String?
+    Order  Order[]
 }
