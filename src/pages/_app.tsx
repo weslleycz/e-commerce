@@ -1,6 +1,12 @@
 import type { AppProps } from "next/app";
+import { Menu } from "../components/Menu";
 import "../styles/globals.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
-    return <Component {...pageProps} />;
+    return (
+        <>
+            <Menu />
+            <Component {...pageProps} />
+        </>
+    );
 }

@@ -39,17 +39,24 @@ export const Menu = () => {
                                 </Button>
                             </Link>
 
+                            <Link href="/products">
                             <Button color="primary" variant="text">
                                 Produtos
                             </Button>
+                            </Link>
 
+                            <Link href="/contact">
                             <Button color="primary" variant="text">
                                 Contato
                             </Button>
-
+                            </Link>
+                            
+                            <Link href="/blog">
                             <Button color="primary" variant="text">
                                 Blog
                             </Button>
+                            </Link>
+
                         </Stack>
                     </Container>
                     <Stack direction="row" spacing={3}>
