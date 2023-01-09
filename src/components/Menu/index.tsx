@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import Image from "next/image";
+import Link from "next/link";
 import Logo from "../../assets/logo.svg";
 import styles from "./styles.module.scss";
 
@@ -27,12 +28,16 @@ export const Menu = () => {
         <>
             <ThemeProvider theme={theme}>
                 <Stack direction="row" className={styles.container}>
-                    <Image width={40} src={Logo} alt="Logo" />
+                    <Link href="/">
+                        <Image width={40} src={Logo} alt="Logo" />
+                    </Link>
                     <Container maxWidth="xs">
                         <Stack direction="row" spacing={3}>
-                            <Button color="primary" variant="text">
-                                Home
-                            </Button>
+                            <Link href="/">
+                                <Button color="primary" variant="text">
+                                    Home
+                                </Button>
+                            </Link>
 
                             <Button color="primary" variant="text">
                                 Produtos

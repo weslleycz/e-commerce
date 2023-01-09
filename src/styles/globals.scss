@@ -4,6 +4,8 @@
     padding: 0;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap");
+
 @media (max-width: 1080px) {
     html {
         font-size: 93.75%;
@@ -178,7 +180,7 @@ select,
 button {
     font-weight: 400;
     font-size: 1rem;
-    font-family: "Rufina", serif;
+    font-family: "Roboto", sans-serif;
 }
 
 button {

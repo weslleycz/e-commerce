@@ -1,8 +1,7 @@
 import { Box, Container, useMediaQuery } from "@mui/material";
+import Image from "next/image";
 import Controller from "../../assets/controller.svg";
 import { styles } from "./styles";
-
-import Image from "next/image";
 
 export const Hero = () => {
     const matches = useMediaQuery("(min-width:600px)");
@@ -10,7 +9,7 @@ export const Hero = () => {
         <>
             <Box sx={styles(matches)}>
                 <Container maxWidth="sm">
-                <Image
+                    <Image
                         width={matches ? 500 : 250}
                         src={Controller}
                         alt="Controle"

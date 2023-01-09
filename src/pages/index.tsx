@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { Hero } from "../components/Hero";
+import { Highlights } from "../components/Highlights";
 import { Menu } from "../components/Menu";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
             </Head>
             <Menu />
             <Hero />
+            <Highlights />
         </>
     );
 }

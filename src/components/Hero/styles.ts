@@ -14,7 +14,5 @@ export const styles = (matches: boolean) => {
               alignItems: "center",
               display: "grid",
               gap: 1,
-              paddingTop: 30,
-              paddingBottom: 30,
           };
 };
