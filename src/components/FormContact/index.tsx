@@ -1,16 +1,19 @@
+import { useForm } from "@formspree/react";
 import {
+    Alert,
     Box,
     Button,
     createTheme,
     CssBaseline,
     Grid,
     Paper,
+    Snackbar,
     TextField,
     ThemeProvider,
     Typography,
-    useMediaQuery,
 } from "@mui/material";
 import { useFormik } from "formik";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { styles } from "./styles";
 
 const theme = createTheme({
@@ -23,21 +26,44 @@ const theme = createTheme({
 });
 
 export const FormContact = () => {
+    const [state, handleSubmit] = useForm("mvonolgg");
+
+    const [open, setOpen] = useState(false);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event?: SyntheticEvent | Event, reason?: string) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        setOpen(false);
+    };
+
     const formik = useFormik({
         initialValues: {
             assunto: "",
-            mensagem:""
+            mensagem: "",
+            email: "",
         },
-        onSubmit: (values) => {
-            console.log(values);
+        onSubmit: (values, { resetForm }) => {
+            handleSubmit(values);
+            resetForm();
         },
     });
-    const matches = useMediaQuery("(min-width:600px)");
+
+    useEffect(() => {
+        if (state.succeeded) {
+            setOpen(true);
+        }
+    }, [state.succeeded]);
 
     return (
         <>
             <ThemeProvider theme={theme}>
-                <Grid  container component="main" sx={styles.conteiner}>
+                <Grid container component="main" sx={styles.conteiner}>
                     <CssBaseline />
                     <Grid
                         item
@@ -58,8 +84,8 @@ export const FormContact = () => {
                     />
                     <Grid
                         item
-                        xs={12}
-                        sm={8}
+                        xs={20}
+                        sm={10}
                         md={5}
                         component={Paper}
                         elevation={6}
@@ -75,10 +101,12 @@ export const FormContact = () => {
                             }}
                         >
                             <Typography
-                            sx={{
-                                fontWeight: "bold",
-                            }}
-                             component="h1" variant="h5">
+                                sx={{
+                                    fontWeight: "bold",
+                                }}
+                                component="h1"
+                                variant="h5"
+                            >
                                 Contato
                             </Typography>
                             <Box
@@ -90,6 +118,19 @@ export const FormContact = () => {
                                 <TextField
                                     margin="normal"
                                     fullWidth
+                                    required
+                                    label="E-mail"
+                                    name="email"
+                                    id="email"
+                                    type="email"
+                                    autoFocus
+                                    onChange={formik.handleChange}
+                                    value={formik.values.email}
+                                />
+                                <TextField
+                                    margin="normal"
+                                    fullWidth
+                                    required
                                     label="Assunto"
                                     name="assunto"
                                     id="assunto"
@@ -102,6 +143,7 @@ export const FormContact = () => {
                                     margin="normal"
                                     fullWidth
                                     multiline
+                                    required
                                     rows={4}
                                     name="mensagem"
                                     id="mensagem"
@@ -116,9 +158,7 @@ export const FormContact = () => {
                                     fullWidth
                                     size="large"
                                     variant="contained"
-                                    sx={{ mt: 2, mb: 3,
-                                     }}
-
+                                    sx={{ mt: 2, mb: 3 }}
                                 >
                                     Enviar
                                 </Button>
@@ -127,6 +167,16 @@ export const FormContact = () => {
                     </Grid>
                 </Grid>
             </ThemeProvider>
+
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: "100%" }}
+                >
+                    E-mail enviando!
+                </Alert>
+            </Snackbar>
         </>
     );
 };
