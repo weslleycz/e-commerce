@@ -1,10 +1,9 @@
-import { SxProps } from "@mui/material";
 
-export const styles ={
-    conteiner:{
-        height: "100vh",
-    },
-    cont:{
-        
-    }
+export const styles = (matches:boolean) => {
+    return ({
+        conteiner:{
+            height:matches? "60vh":"90vh",
+        },
+    })
 }
+

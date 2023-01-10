@@ -4,13 +4,13 @@ import {
     Box,
     Button,
     createTheme,
-    CssBaseline,
     Grid,
     Paper,
     Snackbar,
     TextField,
     ThemeProvider,
     Typography,
+    useMediaQuery,
 } from "@mui/material";
 import { useFormik } from "formik";
 import { SyntheticEvent, useEffect, useState } from "react";
@@ -28,11 +28,9 @@ const theme = createTheme({
 export const FormContact = () => {
     const [state, handleSubmit] = useForm("mvonolgg");
 
-    const [open, setOpen] = useState(false);
+    const matches = useMediaQuery("(min-width:600px)");
 
-    const handleClick = () => {
-        setOpen(true);
-    };
+    const [open, setOpen] = useState(false);
 
     const handleClose = (event?: SyntheticEvent | Event, reason?: string) => {
         if (reason === "clickaway") {
@@ -63,8 +61,7 @@ export const FormContact = () => {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <Grid container component="main" sx={styles.conteiner}>
-                    <CssBaseline />
+                <Grid container component="main" sx={styles(matches).conteiner}>
                     <Grid
                         item
                         xs={false}
@@ -74,10 +71,6 @@ export const FormContact = () => {
                             backgroundImage:
                                 "url(https://c0.wallpaperflare.com/preview/107/827/799/black-and-white-close-up-hanging-headphones.jpg)",
                             backgroundRepeat: "no-repeat",
-                            backgroundColor: (t) =>
-                                t.palette.mode === "light"
-                                    ? t.palette.grey[50]
-                                    : t.palette.grey[900],
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                         }}
@@ -174,7 +167,7 @@ export const FormContact = () => {
                     severity="success"
                     sx={{ width: "100%" }}
                 >
-                    E-mail enviando!
+                    E-mail enviando!!
                 </Alert>
             </Snackbar>
         </>
