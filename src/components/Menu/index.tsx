@@ -60,10 +60,12 @@ export const Menu = () => {
                         </Stack>
                     </Container>
                     <Stack direction="row" spacing={3}>
-                        <Button color="primary" variant="text">
+                    <Link href="/signIn">
+                    <Button color="primary" variant="text">
                             Entrar
                         </Button>
                         <Button variant="contained">cadastre-se</Button>
+                    </Link>
                     </Stack>
                 </Stack>
             </ThemeProvider>
