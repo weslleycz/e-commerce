@@ -6,7 +6,6 @@ import {
     createHandler,
     Post,
     Res,
-    UnauthorizedException,
     ValidationPipe,
 } from "next-api-decorators";
 import { LoginDto } from "../../../dtos/user/login.dto";
@@ -30,7 +29,9 @@ class UserHandler {
                 },
             });
             if (!user) {
-                throw new UnauthorizedException("e-mail não cadastrado");
+                return res.status(400).json({
+                    message: "e-mail não cadastrado",
+                });
             }
             if (await compare(password, user.password)) {
                 if (process.env.TOKEN_KAY) {
@@ -41,7 +42,9 @@ class UserHandler {
                     });
                 }
             } else {
-                throw new UnauthorizedException("Senha incorreta");
+                return res.status(400).json({
+                    message: "Senha incorreta",
+                });
             }
         } catch (error) {
             return res.status(400).json({ status: error, has_error: true });

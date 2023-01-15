@@ -2726,6 +2726,11 @@ react-transition-group@^4.4.5:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
+react-use-session@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-use-session/-/react-use-session-1.2.0.tgz#9afd83d4da79a2290df4e7db48d26ea3db91f335"
+  integrity sha512-mOwikE2i+1q+K9KqiFIptdnN+CltTRw3aPRR9+pC+iODLJjWFbsiyy6+JP7jAoTOfPWPV5u7U+tTPloNK8WdNA==
+
 react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
