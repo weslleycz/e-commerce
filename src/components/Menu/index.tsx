@@ -64,8 +64,8 @@ export const Menu = () => {
                     <Button color="primary" variant="text">
                             Entrar
                         </Button>
-                        <Button variant="contained">cadastre-se</Button>
                     </Link>
+                    <Button variant="contained">cadastre-se</Button>
                     </Stack>
                 </Stack>
             </ThemeProvider>

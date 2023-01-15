@@ -1,5 +1,5 @@
-export type ILogin={
-    data:{
+export type ILogin = {
+    data: {
         token: string;
-    }
-}
+    };
+};

@@ -15,6 +15,7 @@ import createValidator from "class-validator-formik";
 import { setCookie } from "cookies-next";
 import { Formik } from "formik";
 import moment from "moment";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSession } from "react-use-session";
 import { LoginDto } from "../../dtos/user/login.dto";
@@ -22,9 +23,11 @@ import { api } from "../../services/apí";
 import { AxiosError } from "../../types/AxiosError";
 import { ILogin } from "../../types/Login";
 
+
 export const FormLogin = () => {
     const { session, saveJWT } = useSession("jwt", false);
     const [isCheck, setIsCheck] = useState(false);
+    const router = useRouter();
 
     const theme = createTheme({
         palette: {
@@ -48,12 +51,15 @@ export const FormLogin = () => {
                         })) as ILogin;
                         if (isCheck) {
                             setCookie("jwt", data.data.token, {
-                                expires:new Date(moment().add(24, "hours").format())
+                                expires: new Date(
+                                    moment().add(24, "hours").format()
+                                ),
                             });
-                        }else{
+                        } else {
                             saveJWT(data.data.token);
                         }
                         resetForm();
+                        router.push("/");
                     } catch (error) {
                         const data = error as AxiosError;
                         if (
