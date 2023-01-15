@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "mongodb"
     url      = env("DATABASE_URL")
 }
 
 model User {
-    id       String    @id @default(uuid())
+    id       String    @id @default(auto()) @map("_id") @db.ObjectId
     email    String    @unique
     password String
     name     String
@@ -24,7 +24,7 @@ model User {
 }
 
 model Card {
-    id             String   @id @default(uuid())
+    id             String   @id @default(auto()) @map("_id") @db.ObjectId
     account_holder String
     number         String   @unique
     cvv            String
@@ -37,7 +37,7 @@ model Card {
 }
 
 model ADM {
-    id       String @id @default(uuid())
+    id       String @id @default(auto()) @map("_id") @db.ObjectId
     name     String
     cnpj     String @unique
     email    String @unique
@@ -47,7 +47,7 @@ model ADM {
 }
 
 model Product {
-    id          String  @id @default(uuid())
+    id          String  @id @default(auto()) @map("_id") @db.ObjectId
     name        String
     price       BigInt
     description String
@@ -59,7 +59,7 @@ model Product {
 }
 
 model Order {
-    id        String    @id @default(uuid())
+    id        String    @id @default(auto()) @map("_id") @db.ObjectId
     products  Product[]
     user      User      @relation(fields: [userId], references: [id])
     card      Card      @relation(fields: [cardId], references: [id])
@@ -71,7 +71,7 @@ model Order {
 }
 
 model Address {
-    id     String  @id @default(uuid())
+    id     String  @id @default(auto()) @map("_id") @db.ObjectId
     cep    String
     city   String
     number Int
